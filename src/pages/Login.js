@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { loginInitiate, googleSignInInitiate } from '../redux/action';
 import { useNavigate } from 'react-router-dom';
 
