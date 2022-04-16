@@ -10,13 +10,13 @@ const Home = () => {
 
 	useEffect(() => {
 		if (!currentUser) {
-			navigate('/register');
+			navigate('/');
 		}
 	}, [currentUser, navigate]);
 	const handleAuth = () => {
 		dispatch(logoutInitiate());
 	};
-	return (		
+	return (
 		<div>
 			Home
 			<h2>Welcome !</h2>
