@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { registerInitiate } from '../redux/action';
 import { useNavigate } from 'react-router-dom';
+import { FcGoogle } from 'react-icons/fc';
+import { ImFacebook2, ImGithub } from 'react-icons/im';
+import './Login.css';
 
 const Register = () => {
 	const [state, setState] = useState({
-		displayName: '',
+		firstName: '',
+		lastName: '',
 		email: '',
 		password: '',
 		passwordConfirm: '',
@@ -20,7 +24,10 @@ const Register = () => {
 		}
 	}, [currentUser, navigate]);
 	const dispatch = useDispatch();
-	const { email, password, displayName, passwordConfirm } = state;
+	const { email, password, firstName, lastName, passwordConfirm } = state;
+	const handleGoogleSignIn = () => {
+		dispatch();
+	};
 	const handChange = (e) => {
 		let { name, value } = e.target;
 		setState({ ...state, [name]: value });
@@ -31,22 +38,56 @@ const Register = () => {
 		if (password !== passwordConfirm) {
 			return;
 		}
-		dispatch(registerInitiate(email, password, displayName));
-		setState({ email: '', displayName: '', password: '', passwordConfirm: '' });
+		dispatch(registerInitiate(email, password, firstName, lastName));
+		setState({
+			email: '',
+			firstName: '',
+			lastName: '',
+			password: '',
+			passwordConfirm: '',
+		});
 	};
 	return (
-		<div>
-			<div>
-				<form onSubmit={handleSubmit}>
-					<h1>Sign Up</h1>
+		<div className='form_container'>
+			<div className='form_left'>
+				<h1>Welcome Back !</h1>
+				<p>To keep connected with us please login with your personal info</p>
 
+				<button className='btn'>
+					<Link to='/login'>Sign In</Link>
+				</button>
+			</div>
+			<div className='form_right'>
+				<form onSubmit={handleSubmit}>
+					<h1>Create Account</h1>
+					<div className='icons'>
+						<button onClick={handleGoogleSignIn}>
+							<FcGoogle className='icon' />
+						</button>
+						<button onClick={handleGoogleSignIn}>
+							<ImFacebook2 className='icon' />
+						</button>
+						<button onClick={handleGoogleSignIn}>
+							<ImGithub className='icon' />
+						</button>
+					</div>
+					<p>or use your email account</p>
 					<input
 						type='text'
-						id='displayName'
-						placeholder='Full Name'
-						name='displayName'
+						id='firstName'
+						placeholder='First Name'
+						name='firstName'
 						onChange={handChange}
-						value={displayName}
+						value={firstName}
+						required
+					/>
+					<input
+						type='text'
+						id='lastName'
+						placeholder='Last Name'
+						name='lastName'
+						onChange={handChange}
+						value={lastName}
 						required
 					/>
 					<input
@@ -76,9 +117,9 @@ const Register = () => {
 						value={passwordConfirm}
 						required
 					/>
-					<button type='submit'>Sign Up</button>
-
-					<Link to='/login'>Sign In</Link>
+					<button className='btn' type='submit'>
+						Sign Up
+					</button>
 				</form>
 			</div>
 		</div>
