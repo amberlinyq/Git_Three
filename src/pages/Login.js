@@ -6,17 +6,15 @@ import { useNavigate } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 import { ImFacebook2, ImGithub } from 'react-icons/im';
 import './Login.css';
-import { Button, Box } from "../utilities";
-
+import { Button, Box } from '../utilities';
 
 const Login = () => {
-  const [state, setState] = useState({
-    email: "",
-    password: "",
-  });
-  const { currentUser } = useSelector((state) => state.user);
-  const navigate = useNavigate();
-
+	const [state, setState] = useState({
+		email: '',
+		password: '',
+	});
+	const { currentUser } = useSelector((state) => state.user);
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		if (currentUser) {
@@ -29,7 +27,8 @@ const Login = () => {
 		let { name, value } = e.target;
 		setState({ ...state, [name]: value });
 	};
-	const handleGoogleSignIn = () => {
+	const handleGoogleSignIn = (e) => {
+		e.preventDefault();
 		dispatch(googleSignInInitiate());
 	};
 	const handleSubmit = (e) => {
@@ -54,10 +53,11 @@ const Login = () => {
 					<h1>Sign in to Git_Three</h1>
 
 					<div className='icons'>
-             <Box justify={"center"}>            
-            <Button onClick={handleGoogleSignIn} text={"Google"} />
-              <FcGoogle className='icon' />
-          </Box>
+						<Box justify={'center'}>
+							<Button onClick={handleGoogleSignIn}>
+								<FcGoogle className='icon' />
+							</Button>
+						</Box>
 						<button onClick={handleGoogleSignIn}>
 							<ImFacebook2 className='icon' />
 						</button>

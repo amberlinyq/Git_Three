@@ -64,17 +64,28 @@ export const SetUser = (user) => ({
 	payload: user,
 });
 
-export const registerInitiate = (email, password, displayName) => {
+export const registerInitiate = (
+	email,
+	password,
+	firstName,
+	lastName,
+	state,
+	setState
+) => {
 	return function (dispatch) {
 		dispatch(registerStart());
 		createUserWithEmailAndPassword(auth, email, password)
 			.then(({ user }) => {
 				updateProfile(user, {
-					displayName,
+					firstName,
+					lastName,
 				});
 				dispatch(registerSuccess(user));
 			})
-			.catch((error) => dispatch(registerFail(error.message)));
+			.catch((error) => {
+				dispatch(registerFail(error.message));
+				setState({ ...state, email: '' });
+			});
 	};
 };
 export const loginInitiate = (email, password) => {

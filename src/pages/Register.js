@@ -20,7 +20,7 @@ const Register = () => {
 
 	useEffect(() => {
 		if (currentUser) {
-			navigate('/');
+			navigate('/home');
 		}
 	}, [currentUser, navigate]);
 	const dispatch = useDispatch();
@@ -38,14 +38,14 @@ const Register = () => {
 		if (password !== passwordConfirm) {
 			return;
 		}
-		dispatch(registerInitiate(email, password, firstName, lastName));
-		setState({
-			email: '',
-			firstName: '',
-			lastName: '',
-			password: '',
-			passwordConfirm: '',
-		});
+		dispatch(registerInitiate(email, password, firstName, lastName,state,setState));
+		// setState({
+		// 	email: '',
+		// 	firstName: '',
+		// 	lastName: '',
+		// 	password: '',
+		// 	passwordConfirm: '',
+		// });
 	};
 	return (
 		<div className='form_container'>

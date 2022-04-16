@@ -22,8 +22,29 @@ const firebaseConfig = {
 };
 
 const app = firebase.initializeApp(firebaseConfig);
-
 const auth = getAuth();
+console.log('app=====', app);
+console.log('auth======', auth);
+
+
+// const listAllUsers = (nextPageToken) => {
+// 	getAuth()
+// 		.listUsers(1000, nextPageToken)
+// 		.then((listUsersResult) => {
+// 			listUsersResult.users.forEach((userRecord) => {
+// 				console.log('user', userRecord.toJSON());
+// 			});
+// 			if (listUsersResult.pageToken) {
+// 				listAllUsers(listUsersResult.pageToken);
+// 			}
+// 		})
+// 		.catch((error) => {
+// 			console.log('Error listing users:', error);
+// 		});
+// };
+
+// listAllUsers();
+
 const googleAuthProvider = new GoogleAuthProvider();
 const favebookAuthProvider = new FacebookAuthProvider();
 
