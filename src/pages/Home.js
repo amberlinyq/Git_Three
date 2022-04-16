@@ -16,7 +16,7 @@ const Home = () => {
 	const handleAuth = () => {
 		dispatch(logoutInitiate());
 	};
-	return (
+	return (		
 		<div>
 			Home
 			<h2>Welcome !</h2>
