@@ -3,6 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { loginInitiate, googleSignInInitiate } from '../redux/action';
 import { useNavigate } from 'react-router-dom';
+import { FcGoogle } from 'react-icons/fc';
+import { ImFacebook2, ImGithub } from 'react-icons/im';
+import './Login.css';
 
 const Login = () => {
 	const [state, setState] = useState({
@@ -14,7 +17,7 @@ const Login = () => {
 
 	useEffect(() => {
 		if (currentUser) {
-			navigate('/');
+			navigate('/home');
 		}
 	}, [currentUser, navigate]);
 	const dispatch = useDispatch();
@@ -35,21 +38,35 @@ const Login = () => {
 		setState({ email: '', password: '' });
 	};
 	return (
-		<div>
-			<div>
+		<div className='form_container'>
+			<div className='form_left'>
+				<h1>Hello Friend !</h1>
+				<p>Enter your personal details and start journey with us</p>
+				<button className='btn'>
+					<Link to='/register'>Sign Up</Link>
+				</button>
+			</div>
+			<div className='form_right'>
 				<form onSubmit={handleSubmit}>
-					<h1>Sign In</h1>
+					<h1>Sign in to Git_Three</h1>
 
-					<div>
+					<div className='icons'>
 						<button onClick={handleGoogleSignIn}>
-							<span>sign in with Google</span>
+							<FcGoogle className='icon' />
+						</button>
+						<button onClick={handleGoogleSignIn}>
+							<ImFacebook2 className='icon' />
+						</button>
+						<button onClick={handleGoogleSignIn}>
+							<ImGithub className='icon' />
 						</button>
 					</div>
-					<p>OR</p>
+					<p>or use your email account</p>
+
 					<input
 						type='email'
 						id='inputEmail'
-						placeholder='Email Address'
+						placeholder='Email'
 						name='email'
 						onChange={handChange}
 						value={email}
@@ -64,10 +81,10 @@ const Login = () => {
 						value={password}
 						required
 					/>
-					<button type='submit'>submit</button>
-					<hr />
-					<p>Don't have an account</p>
-					<Link to='/register'>Sign Up</Link>
+					<p>Forgot your password?</p>
+					<button className='btn' type='submit'>
+						SIGN IN
+					</button>
 				</form>
 			</div>
 		</div>
