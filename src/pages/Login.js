@@ -6,14 +6,17 @@ import { useNavigate } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 import { ImFacebook2, ImGithub } from 'react-icons/im';
 import './Login.css';
+import { Button, Box } from "../utilities";
+
 
 const Login = () => {
-	const [state, setState] = useState({
-		email: '',
-		password: '',
-	});
-	const { currentUser } = useSelector((state) => state.user);
-	const navigate = useNavigate();
+  const [state, setState] = useState({
+    email: "",
+    password: "",
+  });
+  const { currentUser } = useSelector((state) => state.user);
+  const navigate = useNavigate();
+
 
 	useEffect(() => {
 		if (currentUser) {
@@ -51,9 +54,10 @@ const Login = () => {
 					<h1>Sign in to Git_Three</h1>
 
 					<div className='icons'>
-						<button onClick={handleGoogleSignIn}>
-							<FcGoogle className='icon' />
-						</button>
+             <Box justify={"center"}>            
+            <Button onClick={handleGoogleSignIn} text={"Google"} />
+              <FcGoogle className='icon' />
+          </Box>
 						<button onClick={handleGoogleSignIn}>
 							<ImFacebook2 className='icon' />
 						</button>
